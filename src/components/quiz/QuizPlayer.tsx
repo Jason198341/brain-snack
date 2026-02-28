@@ -113,7 +113,27 @@ export default function QuizPlayer({ quiz, prevSlug, nextSlug }: Props) {
       </h1>
 
       {/* Choices */}
-      <div className="space-y-3" role="radiogroup" aria-label="선택지">
+      <div
+        className="space-y-3"
+        role="radiogroup"
+        aria-label="선택지"
+        onKeyDown={(e) => {
+          if (isFinished) return;
+          const current = selected ?? -1;
+          if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+            e.preventDefault();
+            const next = Math.min(current + 1, quiz.choices.length - 1);
+            handleSelect(next);
+          } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+            e.preventDefault();
+            const prev = Math.max(current - 1, 0);
+            handleSelect(prev);
+          } else if (e.key === 'Enter' && state === 'SOLVING') {
+            e.preventDefault();
+            handleSubmit();
+          }
+        }}
+      >
         {quiz.choices.map((choice, i) => {
           let classes = 'w-full text-left px-4 py-4 rounded-xl border-2 transition-all text-base font-medium cursor-pointer min-h-[56px] relative';
           const statPercent = stats?.distribution?.[i]

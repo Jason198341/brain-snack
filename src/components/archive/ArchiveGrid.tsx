@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import type { Quiz, Category } from '../../lib/types';
 import { CATEGORIES, CATEGORY_COLORS, DIFFICULTY_LABELS } from '../../lib/types';
 
@@ -13,17 +13,17 @@ export default function ArchiveGrid({ quizzes }: Props) {
   const [searchDebounced, setSearchDebounced] = useState('');
 
   // Debounce search
-  useState(() => {
+  useEffect(() => {
     const timer = setTimeout(() => setSearchDebounced(search), 300);
     return () => clearTimeout(timer);
-  });
+  }, [search]);
 
   const filtered = useMemo(() => {
     let result = [...quizzes];
     if (category !== '전체') result = result.filter((q) => q.category === category);
     if (difficulty > 0) result = result.filter((q) => q.difficulty === difficulty);
-    if (search.trim()) {
-      const q = search.toLowerCase();
+    if (searchDebounced.trim()) {
+      const q = searchDebounced.toLowerCase();
       result = result.filter(
         (quiz) =>
           quiz.title.toLowerCase().includes(q) ||
@@ -32,7 +32,7 @@ export default function ArchiveGrid({ quizzes }: Props) {
       );
     }
     return result;
-  }, [quizzes, category, difficulty, search]);
+  }, [quizzes, category, difficulty, searchDebounced]);
 
   // Check localStorage for solved status
   const isSolved = (slug: string) => {

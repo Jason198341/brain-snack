@@ -1,0 +1,170 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SampleQuiz from '../components/landing/SampleQuiz';
+import { quizzes } from '../lib/quizzes';
+
+const latestQuiz = quizzes[0];
+const totalQuizzes = quizzes.length;
+---
+
+<BaseLayout title="뇌간식">
+  <!-- Hero -->
+  <section class="relative overflow-hidden bg-gradient-to-b from-[var(--color-bg-warm)] to-[var(--color-bg-light)]">
+    <div class="max-w-5xl mx-auto px-4 py-16 sm:py-24 text-center">
+      <div class="text-6xl mb-6">🧠</div>
+      <h1 class="text-3xl sm:text-5xl font-bold leading-tight mb-4">
+        매일 아침, <span class="text-[var(--color-primary)]">한 문제</span>.<br />
+        출근길에 한입이면 됩니다.
+      </h1>
+      <p class="text-lg text-[var(--color-text-secondary)] max-w-xl mx-auto mb-8">
+        AI가 엄선한 교양 퀴즈 1개 + 초등학생도 이해하는 해설을<br class="hidden sm:block" />
+        매일 이메일로 보내드립니다.
+      </p>
+      <form id="hero-subscribe" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto mb-4">
+        <input
+          type="email"
+          name="email"
+          placeholder="이메일 주소 입력"
+          required
+          class="flex-1 px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-[var(--color-dark-surface)] text-base focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
+        />
+        <button
+          type="submit"
+          class="px-6 py-3 rounded-xl bg-[var(--color-primary)] text-white font-semibold text-base hover:bg-[var(--color-primary-dark)] transition-colors cursor-pointer min-h-[48px]"
+        >
+          내일부터 받기
+        </button>
+      </form>
+      <p class="text-sm text-[var(--color-text-secondary)]">무료 · 매일 1통 · 언제든 구독 해지</p>
+    </div>
+  </section>
+
+  <!-- Sample Quiz -->
+  <section class="max-w-2xl mx-auto px-4 -mt-8 relative z-10">
+    <div class="bg-white dark:bg-[var(--color-dark-surface)] rounded-2xl shadow-lg p-6 sm:p-8 border border-gray-100 dark:border-gray-800">
+      <p class="text-sm font-medium text-[var(--color-primary)] mb-2">오늘의 문제, 지금 풀어보세요</p>
+      <SampleQuiz quiz={latestQuiz} client:visible />
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="max-w-5xl mx-auto px-4 py-20">
+    <h2 class="text-2xl font-bold text-center mb-12">이렇게 동작합니다</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+      {[
+        { step: '1', icon: '📬', title: '구독', desc: '이메일 하나면 끝. 10초 가입.' },
+        { step: '2', icon: '🧩', title: '매일 아침 8시', desc: '문제 1개가 이메일로 도착.' },
+        { step: '3', icon: '💡', title: '30초 풀기', desc: '정답 확인 + 해설로 지식 충전.' },
+      ].map((item) => (
+        <div class="text-center">
+          <div class="w-16 h-16 rounded-2xl bg-[var(--color-bg-warm)] flex items-center justify-center text-3xl mx-auto mb-4">
+            {item.icon}
+          </div>
+          <div class="text-xs font-bold text-[var(--color-primary)] mb-1">STEP {item.step}</div>
+          <h3 class="font-bold text-lg mb-2">{item.title}</h3>
+          <p class="text-sm text-[var(--color-text-secondary)]">{item.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Social Proof -->
+  <section class="bg-[var(--color-bg-warm)] dark:bg-[var(--color-dark-surface)]">
+    <div class="max-w-5xl mx-auto px-4 py-16">
+      <div class="grid grid-cols-3 gap-4 text-center">
+        <div>
+          <p class="text-3xl font-bold text-[var(--color-primary)]">{totalQuizzes}+</p>
+          <p class="text-sm text-[var(--color-text-secondary)]">누적 문제 수</p>
+        </div>
+        <div>
+          <p class="text-3xl font-bold text-[var(--color-primary)]">10개</p>
+          <p class="text-sm text-[var(--color-text-secondary)]">분야</p>
+        </div>
+        <div>
+          <p class="text-3xl font-bold text-[var(--color-primary)]">매일</p>
+          <p class="text-sm text-[var(--color-text-secondary)]">새로운 문제</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="max-w-2xl mx-auto px-4 py-20">
+    <h2 class="text-2xl font-bold text-center mb-10">자주 묻는 질문</h2>
+    <div class="space-y-4">
+      {[
+        { q: '어떤 분야의 문제가 나오나요?', a: '경제, 한국사, 과학, 법, 심리, IT, 건강, 문학 등 10개 분야에서 교양으로 재밌는 문제만 뽑습니다.' },
+        { q: '정말 무료인가요?', a: '매일 1문제 + 해설은 완전 무료입니다. 심화 해설과 추가 문제는 프리미엄에서 제공됩니다.' },
+        { q: '매일 안 풀면 어떻게 되나요?', a: '아무 일도 일어나지 않습니다. 지난 문제는 아카이브에서 언제든 풀 수 있어요.' },
+        { q: '구독 해지는 어떻게 하나요?', a: '모든 이메일 하단의 구독 해지 링크를 클릭하면 즉시 해지됩니다.' },
+      ].map((faq) => (
+        <details class="group bg-white dark:bg-[var(--color-dark-surface)] rounded-xl border border-gray-100 dark:border-gray-800 p-4 cursor-pointer">
+          <summary class="font-semibold flex items-center justify-between list-none">
+            <span>{faq.q}</span>
+            <svg class="w-5 h-5 text-[var(--color-text-secondary)] transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <p class="mt-3 text-sm text-[var(--color-text-secondary)] leading-relaxed">{faq.a}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- Bottom CTA -->
+  <section class="bg-[var(--color-primary)] text-white">
+    <div class="max-w-2xl mx-auto px-4 py-16 text-center">
+      <h2 class="text-2xl font-bold mb-4">내일 아침, 첫 문제를 받아보세요.</h2>
+      <form id="bottom-subscribe" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+        <input
+          type="email"
+          name="email"
+          placeholder="이메일 주소 입력"
+          required
+          class="flex-1 px-4 py-3 rounded-xl text-[var(--color-text-primary)] bg-white text-base focus:outline-none focus:ring-2 focus:ring-white/50"
+        />
+        <button
+          type="submit"
+          class="px-6 py-3 rounded-xl bg-white text-[var(--color-primary)] font-semibold text-base hover:bg-gray-100 transition-colors cursor-pointer min-h-[48px]"
+        >
+          무료로 시작하기
+        </button>
+      </form>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  document.querySelectorAll('#hero-subscribe, #bottom-subscribe').forEach((form) => {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target as HTMLFormElement);
+      const email = formData.get('email') as string;
+      if (!email) return;
+
+      const btn = (e.target as HTMLFormElement).querySelector('button')!;
+      const originalText = btn.textContent;
+      btn.textContent = '처리 중...';
+      btn.setAttribute('disabled', 'true');
+
+      try {
+        const res = await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email }),
+        });
+        if (res.ok) {
+          btn.textContent = '확인 이메일을 보냈어요!';
+          btn.classList.add('bg-[var(--color-correct)]');
+        } else {
+          const data = await res.json();
+          btn.textContent = data.error || '다시 시도해주세요';
+          setTimeout(() => { btn.textContent = originalText; btn.removeAttribute('disabled'); }, 2000);
+        }
+      } catch {
+        btn.textContent = '네트워크 오류';
+        setTimeout(() => { btn.textContent = originalText; btn.removeAttribute('disabled'); }, 2000);
+      }
+    });
+  });
+</script>

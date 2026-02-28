@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import QuizPlayer from '../../components/quiz/QuizPlayer';
+import { quizzes, getQuizBySlug } from '../../lib/quizzes';
+
+export function getStaticPaths() {
+  return quizzes.map((quiz, i) => ({
+    params: { slug: quiz.slug },
+    props: {
+      quiz,
+      prevSlug: i > 0 ? quizzes[i - 1].slug : undefined,
+      nextSlug: i < quizzes.length - 1 ? quizzes[i + 1].slug : undefined,
+    },
+  }));
+}
+
+const { quiz, prevSlug, nextSlug } = Astro.props;
+const siteUrl = import.meta.env.PUBLIC_SITE_URL || 'https://brain-snack.vercel.app';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Quiz',
+  name: quiz.title,
+  about: { '@type': 'Thing', name: quiz.category },
+  educationalLevel: ['쉬움', '보통', '어려움'][quiz.difficulty - 1],
+  hasPart: [{
+    '@type': 'Question',
+    name: quiz.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: quiz.choices[quiz.correctIndex],
+    },
+    suggestedAnswer: quiz.choices.map((c: string) => ({ '@type': 'Answer', text: c })),
+  }],
+};
+---
+
+<BaseLayout
+  title={quiz.title}
+  description={`${quiz.question} — 뇌간식에서 풀어보세요!`}
+  ogImage={`${siteUrl}/api/og?title=${encodeURIComponent(quiz.title)}&category=${encodeURIComponent(quiz.category)}`}
+  ogType="article"
+>
+  <div class="max-w-2xl mx-auto px-4 py-8 sm:py-12">
+    <QuizPlayer quiz={quiz} prevSlug={prevSlug} nextSlug={nextSlug} client:load />
+  </div>
+
+  <!-- Subscribe CTA -->
+  <section class="bg-[var(--color-bg-warm)] dark:bg-[var(--color-dark-surface)] mt-8">
+    <div class="max-w-2xl mx-auto px-4 py-12 text-center">
+      <p class="text-lg font-bold mb-2">매일 이런 문제를 받아보고 싶다면?</p>
+      <p class="text-sm text-[var(--color-text-secondary)] mb-4">무료로 매일 아침 8시, 이메일로 배달됩니다.</p>
+      <a href="/subscribe" class="inline-block px-6 py-3 rounded-xl bg-[var(--color-primary)] text-white font-semibold no-underline hover:bg-[var(--color-primary-dark)] transition-colors">
+        구독하기 →
+      </a>
+    </div>
+  </section>
+
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+  <style>
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</BaseLayout>

@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="구독 완료" noIndex={true}>
+  <div class="max-w-xl mx-auto px-4 py-20 text-center">
+    <div class="text-6xl mb-6">🎉</div>
+    <h1 class="text-3xl font-bold mb-4">구독이 완료되었습니다!</h1>
+    <p class="text-[var(--color-text-secondary)] mb-8 leading-relaxed">
+      내일 아침 8시, 첫 번째 문제가 도착합니다.<br />
+      그동안 아카이브에서 미리 문제를 풀어보세요!
+    </p>
+    <div class="flex flex-col sm:flex-row gap-3 justify-center">
+      <a
+        href="/archive"
+        class="px-6 py-3 rounded-xl bg-[var(--color-primary)] text-white font-semibold no-underline hover:bg-[var(--color-primary-dark)] transition-colors"
+      >
+        아카이브 둘러보기
+      </a>
+      <a
+        href="/"
+        class="px-6 py-3 rounded-xl border-2 border-gray-200 dark:border-gray-700 font-semibold no-underline hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+      >
+        홈으로 돌아가기
+      </a>
+    </div>
+  </div>
+</BaseLayout>

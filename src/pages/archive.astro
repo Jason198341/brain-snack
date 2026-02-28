@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ArchiveGrid from '../components/archive/ArchiveGrid';
+import { quizzes } from '../lib/quizzes';
+---
+
+<BaseLayout title="아카이브" description="뇌간식의 모든 문제를 분야별, 난이도별로 탐색해보세요.">
+  <div class="max-w-5xl mx-auto px-4 py-8 sm:py-12">
+    <div class="text-center mb-10">
+      <h1 class="text-3xl font-bold mb-2">아카이브</h1>
+      <p class="text-[var(--color-text-secondary)]">지금까지의 모든 문제를 탐색해보세요.</p>
+    </div>
+    <ArchiveGrid quizzes={quizzes} client:load />
+  </div>
+</BaseLayout>

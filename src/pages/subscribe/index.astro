@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SubscribeForm from '../../components/subscribe/SubscribeForm';
+---
+
+<BaseLayout title="구독하기" description="매일 아침 8시, 한 입 크기 지식 퀴즈를 이메일로 받아보세요.">
+  <div class="max-w-xl mx-auto px-4 py-12 sm:py-20">
+    <div class="text-center mb-10">
+      <div class="text-5xl mb-4">📬</div>
+      <h1 class="text-3xl font-bold mb-3">매일 아침, 한 문제.</h1>
+      <p class="text-[var(--color-text-secondary)] leading-relaxed">
+        AI가 엄선한 교양 퀴즈 + 초등학생도 이해하는 해설을<br />
+        매일 이메일로 보내드립니다.
+      </p>
+    </div>
+
+    <div class="bg-white dark:bg-[var(--color-dark-surface)] rounded-2xl shadow-lg p-6 sm:p-8 border border-gray-100 dark:border-gray-800">
+      <SubscribeForm client:load />
+    </div>
+
+    <!-- Benefits -->
+    <div class="mt-10 grid grid-cols-2 gap-4">
+      {[
+        { icon: '🧠', text: '10개 분야 교양 퀴즈' },
+        { icon: '📖', text: '누구나 이해하는 해설' },
+        { icon: '⏰', text: '매일 아침 8시 배달' },
+        { icon: '🆓', text: '완전 무료, 언제든 해지' },
+      ].map((b) => (
+        <div class="flex items-center gap-3 p-3 rounded-xl bg-[var(--color-bg-warm)] dark:bg-[var(--color-dark-surface)]">
+          <span class="text-2xl">{b.icon}</span>
+          <span class="text-sm font-medium">{b.text}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

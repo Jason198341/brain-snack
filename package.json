@@ -1,0 +1,28 @@
+{
+  "name": "brain-snack",
+  "version": "1.0.0",
+  "description": "뇌간식 — 매일 한 입 크기 지식 퀴즈",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "@astrojs/react": "^4.4.2",
+    "@astrojs/sitemap": "^3.7.0",
+    "@astrojs/vercel": "^9.0.4",
+    "@tailwindcss/vite": "^4.2.1",
+    "@types/canvas-confetti": "^1.9.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "astro": "^5.18.0",
+    "canvas-confetti": "^1.9.4",
+    "lucide-react": "^0.575.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "tailwindcss": "^4.2.1",
+    "typescript": "^5.9.3"
+  }
+}

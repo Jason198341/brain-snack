@@ -1,0 +1,56 @@
+---
+const navItems = [
+  { label: '오늘의 문제', href: '/quiz/today' },
+  { label: '아카이브', href: '/archive' },
+  { label: '구독하기', href: '/subscribe' },
+];
+---
+
+<header class="sticky top-0 z-50 bg-white/80 dark:bg-[var(--color-dark-surface)]/80 backdrop-blur-md border-b border-gray-100 dark:border-gray-800">
+  <nav class="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-2 font-bold text-lg text-[var(--color-primary)] no-underline">
+      <span class="text-2xl" role="img" aria-label="뇌간식 로고">🧠</span>
+      <span class="font-[var(--font-brand)]">뇌간식</span>
+    </a>
+    <div class="hidden sm:flex items-center gap-6">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-primary)] transition-colors no-underline"
+        >
+          {item.label}
+        </a>
+      ))}
+    </div>
+    <button
+      id="mobile-menu-btn"
+      class="sm:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
+      aria-label="메뉴 열기"
+      aria-expanded="false"
+    >
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </nav>
+  <div id="mobile-menu" class="hidden sm:hidden border-t border-gray-100 dark:border-gray-800 bg-white dark:bg-[var(--color-dark-surface)]">
+    {navItems.map((item) => (
+      <a
+        href={item.href}
+        class="block px-4 py-3 text-sm text-[var(--color-text-secondary)] hover:bg-gray-50 dark:hover:bg-gray-800 no-underline"
+      >
+        {item.label}
+      </a>
+    ))}
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  btn?.addEventListener('click', () => {
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!expanded));
+    menu?.classList.toggle('hidden');
+  });
+</script>

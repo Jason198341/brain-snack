@@ -1,0 +1,44 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  ogImage: string;
+  ogType: string;
+  siteUrl: string;
+  noIndex?: boolean;
+  schema?: object;
+}
+
+const { title, description, ogImage, ogType, siteUrl, noIndex = false, schema } = Astro.props;
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalUrl} />
+
+{noIndex && <meta name="robots" content="noindex, nofollow" />}
+
+<!-- Open Graph -->
+<meta property="og:type" content={ogType} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:site_name" content="뇌간식" />
+<meta property="og:locale" content="ko_KR" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+
+<!-- Kakao -->
+<meta property="kakao:title" content={title} />
+<meta property="kakao:description" content={description} />
+<meta property="kakao:image" content={ogImage} />
+
+{schema && (
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+)}

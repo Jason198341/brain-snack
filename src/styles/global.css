@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+@theme {
+  /* Primary */
+  --color-primary: #6C5CE7;
+  --color-primary-dark: #4A3DB8;
+  --color-primary-light: #A29BFE;
+
+  /* Secondary */
+  --color-secondary: #00D2D3;
+
+  /* Accent */
+  --color-accent-coral: #FF6B6B;
+  --color-accent-gold: #FECA57;
+
+  /* Background */
+  --color-bg-light: #F8F9FA;
+  --color-bg-warm: #FFF9F0;
+
+  /* Text */
+  --color-text-primary: #2D3436;
+  --color-text-secondary: #636E72;
+
+  /* Semantic */
+  --color-correct: #059669;
+  --color-wrong: #DC2626;
+
+  /* Dark mode */
+  --color-dark-bg: #1A1A2E;
+  --color-dark-surface: #16213E;
+  --color-dark-text: #E8E8E8;
+
+  /* Fonts */
+  --font-sans: 'Pretendard', 'Noto Sans KR', system-ui, sans-serif;
+  --font-brand: 'Poppins', var(--font-sans);
+
+  /* Breakpoints are built into Tailwind */
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-light);
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    html {
+      background-color: var(--color-dark-bg);
+      color: var(--color-dark-text);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  *:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+}
+
+/* Pretendard font-face */
+@font-face {
+  font-family: 'Pretendard';
+  src: url('/fonts/PretendardVariable.subset.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+}

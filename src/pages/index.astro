@@ -10,9 +10,9 @@ const totalQuizzes = quizzes.length;
 <BaseLayout title="뇌간식">
   <!-- Hero -->
   <section class="relative overflow-hidden bg-gradient-to-b from-[var(--color-bg-warm)] to-[var(--color-bg-light)]">
-    <div class="max-w-5xl mx-auto px-4 py-16 sm:py-24 text-center">
+    <div class="max-w-5xl mx-auto px-4 py-16 sm:py-20 md:py-24 lg:py-32 text-center">
       <div class="text-6xl mb-6">🧠</div>
-      <h1 class="text-3xl sm:text-5xl font-bold leading-tight mb-4">
+      <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4">
         매일 아침, <span class="text-[var(--color-primary)]">한 문제</span>.<br />
         출근길에 한입이면 됩니다.
       </h1>
@@ -50,7 +50,7 @@ const totalQuizzes = quizzes.length;
   <!-- How It Works -->
   <section class="max-w-5xl mx-auto px-4 py-20">
     <h2 class="text-2xl font-bold text-center mb-12">이렇게 동작합니다</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
       {[
         { step: '1', icon: '📬', title: '구독', desc: '이메일 하나면 끝. 10초 가입.' },
         { step: '2', icon: '🧩', title: '매일 아침 8시', desc: '문제 1개가 이메일로 도착.' },

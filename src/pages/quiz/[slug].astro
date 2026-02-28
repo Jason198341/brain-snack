@@ -41,7 +41,7 @@ const schema = {
   ogImage={`${siteUrl}/api/og?title=${encodeURIComponent(quiz.title)}&category=${encodeURIComponent(quiz.category)}`}
   ogType="article"
 >
-  <div class="max-w-2xl mx-auto px-4 py-8 sm:py-12">
+  <div class="max-w-2xl mx-auto px-4 py-8 sm:py-12 md:py-16 lg:py-20">
     <QuizPlayer quiz={quiz} prevSlug={prevSlug} nextSlug={nextSlug} client:load />
   </div>
 

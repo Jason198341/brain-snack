@@ -1,5 +1,7 @@
 import type { APIRoute } from 'astro';
 
+export const prerender = false;
+
 export const GET: APIRoute = async ({ url }) => {
   const title = url.searchParams.get('title') || '뇌간식';
   const category = url.searchParams.get('category') || '';
